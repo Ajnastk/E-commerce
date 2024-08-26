@@ -1,7 +1,7 @@
 let express=require("express")
 let router=express.Router()
 
-const {homepage,shop,about,shopdetails,cart,checkout,blogdetails,blog,contact}=require('../controller/homectrl')
+const {homepage,shop,about,shopdetails,cart,checkout,blogdetails,blog,contact,signin}=require('../controller/homectrl')
 
 router.get("/",homepage)
 
@@ -21,4 +21,6 @@ router.get("/blog",blog)
 
 router.get("/contact",contact)
 
-module.exports=router;
+router.get("/signin",signin)
+
+module.exports=router ;

@@ -16,7 +16,6 @@
 .slicknav_btn {
     position: relative;
     display: block;
-    vertical-align: middle;
     float: right;
     padding: .438em .625em;
     line-height: 1.125em
@@ -101,7 +100,7 @@
 }
 
 .slicknav_menu {
-    *zoom: 1;
+    
     font-size: 16px;
     background: #4c4c4c;
     padding: 5px

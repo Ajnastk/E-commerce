@@ -2,11 +2,24 @@ const express = require("express");
 const app = express();
 require('dotenv').config();
 const path = require("path");
-let dbconnect=require("./config/dbconnect")
+const session = require("express-session")
+const dbconnect=require("./config/dbconnect")
 dbconnect()
 
-let authRouter=require("./routes/authroute")
-let homeroute=require('./routes/homeroute')
+const authRoute=require("./routes/authroute")
+const homeRoute=require('./routes/homeroute')
+const {notfound,errorhandler} = require("./middleware/error-handler")
+
+const PORT = process.env.P0RT || 3008;
+
+app.use(
+    session({
+        secret: 'your_secret_key',
+        resave: false, 
+        saveUninitialized: false,
+        cookie: { secure:false } 
+    })
+);
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}))
@@ -15,10 +28,11 @@ app.set("view engine","ejs");
 app.set("views",path.join(__dirname, "views"));
 app.use(express.static("public"))
 
-app.use(homeroute);
-app.use("/",authRouter)
+app.use(homeRoute);
+app.use(authRoute);
 
-const PORT = process.env.PORT || 3008;
+app.use(notfound),app.use(errorhandler);
+
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);

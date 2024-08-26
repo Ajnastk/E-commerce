@@ -1,47 +1,59 @@
-let User = require("../model/usermodel");
+const User = require("../model/usermodel");
+const asyncHandler = require("async-handler");
 
-let createUser = async (req, res) => {
-    let email = req.body.email
-    let password = req.body.password
 
-    findUser = await User.findOne({
-        email: email
-    })
+const createUser = async (req, res) => {
+    try {
+        const { name, email, mobile, password } = req.body;
 
-    if (!findUser) {
-        newUser = await User.create(req.body)
-        res.json(newUser)
-    } else {
-        res.json(" User name Already exist")
+        const findUser = await User.findOne({
+            email: email
+        })
+
+        if (!findUser) {
+            //create new user
+            newUser = await User.create(req.body)
+            res.status(200).redirect("/signin")
+        } else {
+            //user already exist
+            res.status(404).json({ success: false, message: "User Already Exist" })
+        }
+
+    }
+    catch (err) {
+        //server error
+        console.error(err);
+        res.status(500).json({ message: "interval server error" });
     }
 
-}
+};
+
 //for user login
- 
-let login = async (req,res)=>{
-    try{
+
+let login = async (req, res) => {
+    try {
         //finding registered user
 
-        const {email,password}= req.body;
-    finduser = await user.findOne({email:email,password:password})
-    if(finduser){
- //session creation
+        const { email, password } = req.body;
+        finduser = await User.findOne({ email: email, password: password })
+        if (finduser) {
+            //session creation
 
-  req.session.email = finduser.email;
-  res.json("login successfully")
-    }
-    else{
-        res.json("invalid email id and password")
-    }
-    }catch(err){
- //server error passing
- console.error(err);
- res.status(500).json({message:"interval server error" })
- 
+            req.session.email = finduser.email;
+            res.status(200).redirect('/');
+        }
+        else {
+            res.status(200).json({success:false,  message:"invalid email id and password"})
+        }
+    } catch (err) {
+        //server error passing
+        console.error(err);
+        res.status(500).json({ message: "interval server error" })
+
 
     }
 };
 
 
 
-module.exports = { createUser,login };
+module.exports = { createUser, login };

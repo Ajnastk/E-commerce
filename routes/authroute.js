@@ -3,9 +3,9 @@ let router=express.Router()
 
 let {createUser,login}=require("../controller/userctrl")
 
-router.post("/user_registration",createUser)
-router.post("/user_login",login)
+router.post("/signup",createUser)
+router.post("/signin",login)
 
 
-module.exports=router
+module.exports=router ;
 

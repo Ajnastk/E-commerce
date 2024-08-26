@@ -32,6 +32,9 @@ const contact=(req,res)=>{
     res.render("contact");
 }
 
-module.exports={homepage,shop,about,shopdetails,cart,checkout,blogdetails,blog,contact}
+const signin =(req,res)=>{
+    res.render("signin");
+}
+module.exports={homepage,shop,about,shopdetails,cart,checkout,blogdetails,blog,contact,signin}
 
 
