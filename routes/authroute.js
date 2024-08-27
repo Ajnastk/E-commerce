@@ -1,6 +1,5 @@
-let express=require("express")
-let router=express.Router()
-
+let express = require("express")
+let router = express.Router()
 let {createUser,login}=require("../controller/userctrl")
 
 router.post("/signup",createUser)

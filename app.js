@@ -1,6 +1,6 @@
+require('dotenv').config();
 const express = require("express");
 const app = express();
-require('dotenv').config();
 const path = require("path");
 const session = require("express-session")
 const dbconnect=require("./config/dbconnect")
@@ -29,7 +29,7 @@ app.set("views",path.join(__dirname, "views"));
 app.use(express.static("public"))
 
 app.use(homeRoute);
-app.use(authRoute);
+app.use("/user",authRoute);
 
 app.use(notfound),app.use(errorhandler);
 
@@ -38,3 +38,4 @@ app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 
 });
+

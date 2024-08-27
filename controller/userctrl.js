@@ -1,5 +1,6 @@
 const User = require("../model/usermodel");
-const asyncHandler = require("async-handler");
+const asyncHandler = require('async-handler');
+const bcrypt = require("bcryptjs");
 
 
 const createUser = async (req, res) => {
@@ -13,7 +14,7 @@ const createUser = async (req, res) => {
         if (!findUser) {
             //create new user
             newUser = await User.create(req.body)
-            res.status(200).redirect("/signin")
+            res.status(200).redirect("/")
         } else {
             //user already exist
             res.status(404).json({ success: false, message: "User Already Exist" })
@@ -35,15 +36,23 @@ let login = async (req, res) => {
         //finding registered user
 
         const { email, password } = req.body;
-        finduser = await User.findOne({ email: email, password: password })
-        if (finduser) {
-            //session creation
 
-            req.session.email = finduser.email;
-            res.status(200).redirect('/');
+        //Find the user in the database
+       const finduser = await User.findOne({ email: email})
+
+         if(!finduser){
+            res.status(401).json({success:false, message :"Invalid email id"})
+         }
+       
+       const isMatch = await bcrypt.compare(password,finduser.password);
+
+        if (isMatch) {
+            //store user session information
+            req.session.finduser = { id: finduser._id, email: finduser.email };
+            res.status(200).json({success:true, message:"successfully"});
         }
         else {
-            res.status(200).json({success:false,  message:"invalid email id and password"})
+            res.status(401).json({success:false,  message:"invalid email id and password"})
         }
     } catch (err) {
         //server error passing
@@ -54,6 +63,4 @@ let login = async (req, res) => {
     }
 };
 
-
-
-module.exports = { createUser, login };
+module.exports = { createUser,login };
