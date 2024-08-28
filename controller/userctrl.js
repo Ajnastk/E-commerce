@@ -1,4 +1,4 @@
-const User = require("../model/usermodel");
+const User = require("../model/userModel");
 const asyncHandler = require('async-handler');
 const bcrypt = require("bcryptjs");
 
@@ -38,17 +38,17 @@ let login = async (req, res) => {
         const { email, password } = req.body;
 
         //Find the user in the database
-       const finduser = await User.findOne({ email: email})
+       const findUser = await User.findOne({ email: email})
 
-         if(!finduser){
+         if(!findUser){
             res.status(401).json({success:false, message :"Invalid email id"})
          }
        
-       const isMatch = await bcrypt.compare(password,finduser.password);
+       const isMatch = await bcrypt.compare(password,findUser.password);
 
         if (isMatch) {
             //store user session information
-            req.session.finduser = { id: finduser._id, email: finduser.email };
+            req.session.findUser = { id: findUser._id, email: findUser.email };
             res.status(200).json({success:true, message:"successfully"});
         }
         else {

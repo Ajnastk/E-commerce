@@ -1,7 +1,7 @@
 let express=require("express")
 let router=express.Router()
 
-const {homepage,shop,about,shopdetails,cart,checkout,blogdetails,blog,contact,signin}=require('../controller/homectrl')
+const {homepage,shop,about,shopDetails,cart,checkout,blogDetails,blog,contact,signin}=require('../controller/homectrl')
 
 router.get("/",homepage)
 
@@ -9,13 +9,13 @@ router.get("/shop",shop)
 
 router.get("/about",about)
 
-router.get("/shopdetails",shopdetails)
+router.get("/shopDetails",shopDetails)
 
 router.get("/cart",cart)
 
 router.get("/checkout",checkout)
 
-router.get("/blogdetails",blogdetails)
+router.get("/blogDetails",blogDetails)
 
 router.get("/blog",blog)
 

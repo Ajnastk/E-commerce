@@ -9,7 +9,7 @@ const about=(req,res)=>{
     res.render("about");
 }
 
-const shopdetails=(req,res)=>{
+const shopDetails=(req,res)=>{
     res.render("shop-details");
 }
 
@@ -20,7 +20,7 @@ const cart=(req,res)=>{
 const checkout=(req,res)=>{
     res.render("checkout");
 }
-const blogdetails=(req,res)=>{
+const blogDetails=(req,res)=>{
     res.render("blog-details");
 }
 
@@ -35,6 +35,6 @@ const contact=(req,res)=>{
 const signin =(req,res)=>{
     res.render("signin");
 }
-module.exports={homepage,shop,about,shopdetails,cart,checkout,blogdetails,blog,contact,signin}
+module.exports={homepage,shop,about,shopDetails,cart,checkout,blogDetails,blog,contact,signin}
 
 

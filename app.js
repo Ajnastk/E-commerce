@@ -20,7 +20,6 @@ app.use(
         cookie: { secure:false } 
     })
 );
-
 app.use(express.json());
 app.use(express.urlencoded({extended:true}))
 
@@ -28,13 +27,16 @@ app.set("view engine","ejs");
 app.set("views",path.join(__dirname, "views"));
 app.use(express.static("public"))
 
-app.use(homeRoute);
+
 app.use("/user",authRoute);
+app.use(homeRoute);
+
 
 app.use(notfound),app.use(errorhandler);
 
 
 app.listen(PORT, () => {
+
     console.log(`Server is running on http://localhost:${PORT}`);
 
 });
