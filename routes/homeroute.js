@@ -21,6 +21,6 @@ router.get("/blog",blog)
 
 router.get("/contact",contact)
 
-router.get("/signin",signin)
+router.get("/user/signin",signin)
 
 module.exports=router ;

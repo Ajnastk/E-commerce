@@ -3,6 +3,9 @@ const asyncHandler = require('async-handler');
 const bcrypt = require("bcryptjs");
 
 
+
+    //-----------signup--------
+
 const createUser = async (req, res) => {
     try {
         const { name, email, mobile, password } = req.body;
@@ -29,9 +32,12 @@ const createUser = async (req, res) => {
 
 };
 
-//for user login
+//for user signin
 
-let login = async (req, res) => {
+
+
+let signin = async (req, res) => {
+
     try {
         //finding registered user
 
@@ -57,10 +63,10 @@ let login = async (req, res) => {
     } catch (err) {
         //server error passing
         console.error(err);
-        res.status(500).json({ message: "interval server error" })
+        res.status(500).json({success :false, message: "interval server error" })
 
 
     }
 };
 
-module.exports = { createUser,login };
+module.exports = { createUser,signin };

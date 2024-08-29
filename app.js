@@ -6,7 +6,7 @@ const session = require("express-session")
 const dbconnect=require("./config/dbconnect")
 dbconnect()
 
-const authRoute=require("./routes/authroute")
+const authRoute=require("./routes/authRoute")
 const homeRoute=require('./routes/homeroute')
 const {notfound,errorhandler} = require("./middleware/error-handler")
 
