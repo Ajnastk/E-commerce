@@ -2,13 +2,18 @@ const User = require("../model/userModel");
 const asyncHandler = require('async-handler');
 const bcrypt = require("bcryptjs");
 
+//-------get register page--------
 
+const registerGet= (req,res)=>{
+    res.render('signup')
+}
 
-    //-----------signup--------
+    //-----------register-post--------
 
-const createUser = async (req, res) => {
+const register = async (req, res) => {
     try {
-        const { name, email, mobile, password } = req.body;
+        const { username,email, mobile, password } = req.body;
+        
 
         const findUser = await User.findOne({
             email: email
@@ -17,7 +22,9 @@ const createUser = async (req, res) => {
         if (!findUser) {
             //create new user
             newUser = await User.create(req.body)
-            res.status(200).redirect("/")
+            await newUser.save();
+            res.status(201).json({ success: true, message: 'User created successfully' });
+         
         } else {
             //user already exist
             res.status(404).json({ success: false, message: "User Already Exist" })
@@ -31,42 +38,45 @@ const createUser = async (req, res) => {
     }
 
 };
+//-------get register page--------
+
+const signinGet= (req,res)=>{
+    res.render('signin')
+}
 
 //for user signin
 
-
-
-let signin = async (req, res) => {
-
+const signin = async (req, res) => {
     try {
-        //finding registered user
-
         const { email, password } = req.body;
 
-        //Find the user in the database
-       const findUser = await User.findOne({ email: email})
+        const findUser = await User.findOne({ email: email });
 
-         if(!findUser){
-            res.status(401).json({success:false, message :"Invalid email id"})
-         }
-       
-       const isMatch = await bcrypt.compare(password,findUser.password);
+        if (findUser) {
+                res.json({ success: false, message: "Account already exists" });
+                return;
+            }else {
+                res.json({ success: false, message: "No user found" });
+            }
 
-        if (isMatch) {
-            //store user session information
-            req.session.findUser = { id: findUser._id, email: findUser.email };
-            res.status(200).json({success:true, message:"successfully"});
+            const passwordMatch = await bcrypt.compare(password, findOne.password);
+
+            if (passwordMatch) {
+                if (!findOne.is_blocked) {
+                    req.session.user_id = findOne._id;
+                    res.json({ success: true, message: "Login successful" });
+                } else {
+                    res.json({ success: false, message: "You are blocked from accessing this website" });
+                }
+            } else {
+                res.json({ success: false, message: "Wrong email or password" });
+            }
         }
-        else {
-            res.status(401).json({success:false,  message:"invalid email id and password"})
+        catch (error) {
+            console.log(error)
         }
-    } catch (err) {
-        //server error passing
-        console.error(err);
-        res.status(500).json({success :false, message: "interval server error" })
-
-
     }
-};
+    
+   
 
-module.exports = { createUser,signin };
+module.exports = { registerGet,register,signinGet,signin};

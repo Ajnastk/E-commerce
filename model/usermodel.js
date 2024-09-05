@@ -3,21 +3,18 @@ const bcrypt = require("bcryptjs");
 
 // Declare the Schema of the Mongo model
 var userSchema = new mongoose.Schema({
-    name:{
+    username:{
         type:String,
-        required:true,
-        index:true,
-        unique:true,
+      
+        
     },
     email:{
         type:String,
         required:true,
-        unique:true,
     },
     mobile:{
         type:String,
         required:true,
-        unique:true,
     },
     password:{
         type:String,

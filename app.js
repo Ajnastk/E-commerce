@@ -14,10 +14,10 @@ const PORT = process.env.P0RT || 3008;
 
 app.use(
     session({
-        secret: 'your_secret_key',
+        secret: 'yoursecretkey',
         resave: false, 
-        saveUninitialized: false,
-        cookie: { secure:false } 
+        saveUninitialized: true,
+        cookie: { secure:false }
     })
 );
 app.use(express.json());
@@ -27,10 +27,16 @@ app.set("view engine","ejs");
 app.set("views",path.join(__dirname, "views"));
 app.use(express.static("public"))
 
-
-app.use("/user",authRoute);
+//user routes
+app.use("/",authRoute);
 app.use(homeRoute);
 
+// // Admin Route
+// app.use('/admin', adminRoute);
+
+app.get('*', (req, res) => {
+  res.status(404).render('404');
+});
 
 app.use(notfound),app.use(errorhandler);
 
