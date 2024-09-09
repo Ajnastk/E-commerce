@@ -1,7 +1,7 @@
-require('dotenv').config();
+const dotenv= require('dotenv').config();
 const express = require("express");
 const app = express();
-const path = require("path");
+const path = require ("path");
 const session = require("express-session")
 const dbconnect=require("./config/dbconnect")
 dbconnect()
