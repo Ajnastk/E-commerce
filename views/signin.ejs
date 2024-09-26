@@ -246,7 +246,7 @@
                 showErrorElement.textContent = data.message || 'Login failed. Please try again.';
                 showErrorElement.style.display = 'block';
             } else {
-                window.location.href = "/";  // Redirect to homepage on successful login
+                window.location.href = data.redirectUrl;  // Redirect to homepage/admin Home page on successful login
             }
         } catch (error) {
             console.error(error.message);

@@ -1,39 +1,36 @@
-const nodemailer = require('nodemailer')
-const jwt = require('jsonwebtoken')
+const nodemailer = require('nodemailer');
+require('dotenv').config();
 
+// Email configuration (Gmail setup)
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: process.env.EMAIL_USER,  // Your email address
+        pass: process.env.EMAIL_PASS   // Your app password (not the regular Gmail password)
+    }
+});
 
-//Email cofiguration
-
-
-//Utility function to send an email
-
-sendEmail = async (email,subject,message,html)=>{
-
-    const transporter = nodemailer.createTransport({
-        service:'Gmail',
-        auth: {
-           user:process.env.EMAIL_USER,
-           pass:process.env.EMAIL_PASS
-        }    
-   
-   });
+// Utility function to send an email
+const sendEmail = async (email, subject, message, html) => {
    
     const mailOptions = {
-        from : process.env.EMAIL_USER,
-        to :email,
-        subject:subject,
-        text:message,
-        html:html
+        from: process.env.EMAIL_USER,  // Sender email
+        to: email,  // Recipient email
+        subject: subject,
+        text: message,
+        html: html
     };
 
     try {
         await transporter.sendMail(mailOptions);
-        console.log('Email send successfully to',to);
-        
+        console.log('Email sent successfully');
     } catch (error) {
-        console.error('Error sending email',error);
+        console.error('Error sending email:', error);
     }
 };
+
+
+
 // Utility function to generate JWT token
 generateToken = (payload, expiresIn = '1h') => {
     try {
@@ -57,4 +54,8 @@ verifyToken = (token) => {
     }
 };
 
- module.exports={sendEmail}
+module.exports = { 
+    sendEmail,
+    generateToken,
+    verifyToken
+ };

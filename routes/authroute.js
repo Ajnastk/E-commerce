@@ -1,7 +1,7 @@
 let express = require("express")
 let router = express.Router()
-let {registerGet,register,signin,signinGet}=require("../controller/userctrl")
-let {forgotpasswordGet, forgotPassword}= require("../controller/profileCtrl")
+let {registerGet,register,signin,signinGet}=require("../controller/userCtrl")
+let {forgotpasswordGet, forgotPassword,verifyotpGet,verifyOtp,resetpasswordGet,resetPassword}= require("../controller/profileCtrl")
 
 
 
@@ -14,7 +14,11 @@ router.post("/signin",signin)
 router.get("/forgotPassword",forgotpasswordGet)
 router.post("/forgotPassword",forgotPassword)
 
+router.get("/verifyOtp",verifyotpGet)
+router.post("/verifyOtp",verifyOtp)
 
+router.get("/resetPassword",resetpasswordGet)
+router.post("/resetPassword",resetPassword)
 
 module.exports=router ;
 

@@ -30,7 +30,8 @@ const registerGet= (req,res)=>{
                     username: username,
                     email: email,
                     mobile: mobile,
-                    password: hashedPassword // Store the hashed password
+                    password: hashedPassword ,// Store the hashed password
+                    isAdmin:false,
                 });
     
                 await newUser.save();  // Save the user to the database
@@ -81,11 +82,15 @@ const signin = async (req, res) => {
             return res.status(403).json({ success: false, message: "You are blocked from accessing this website" });
         }
 
+        if (findUser.isAdmin) {
+         return res.status(200).json({success:true,message:"Admin Login successful",redirectUrl:"/admin"})   
+        }
+
         // If password matches and the user is not blocked, set up the session
         req.session.user_id = findUser._id;
      
         // Send success response
-        return res.status(200).json({ success: true, message: "Login successful" });
+        return res.status(200).json({ success: true, message: "Login successful",redirectUrl:"/" });
 
     } catch (error) {
         console.error("Server error during sign-in:", error);

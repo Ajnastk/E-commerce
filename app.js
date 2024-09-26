@@ -7,10 +7,11 @@ const dbconnect=require("./config/dbconnect")
 dbconnect()
 
 const authRoute=require("./routes/authRoute")
-const homeRoute=require('./routes/homeroute')
+const homeRoute=require('./routes/homeRoute')
+const adminRoute=require('./routes/adminRoute')
 const {notfound,errorhandler} = require("./middleware/error-handler")
 
-const PORT = process.env.P0RT || 3008;
+const PORT = process.env.PORT || 3008
 
 app.use(
     session({
@@ -21,6 +22,7 @@ app.use(
     })
 );
 app.use(express.json());
+
 app.use(express.urlencoded({extended:true}))
 
 app.set("view engine","ejs");
@@ -31,14 +33,15 @@ app.use(express.static("public"))
 app.use("/",authRoute);
 app.use(homeRoute);
 
-// // Admin Route
-// app.use('/admin', adminRoute);
+// Admin Route
+app.use('/admin',adminRoute);
 
 app.get('*', (req, res) => {
   res.status(404).render('404');
 });
 
 app.use(notfound),app.use(errorhandler);
+
 
 
 app.listen(PORT, () => {
