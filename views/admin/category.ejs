@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="description" content="E-commerce Admin Dashboard" />
+  <meta name="author" content="Admin" />
+  <title>Male-Fashion Admin</title>
+<link rel="stylesheet" href="css/category.css">
+  <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/b92a467578.js" crossorigin="anonymous"></script>
+</head>
+
+<%- include('common/headernav')  %>
+ <%- include('common/sidenav')  %>
+ 
+    <div id="layoutSidenav_content">
+
+      <div>
+        <main>
+          <!-- Categories Section -->
+          <% if (section === 'categories') { %>
+          <h1>Categories</h1>
+
+          <section class="category-section">
+            <h3>Category</h3>
+            <button class="add-category-btn">Add Category</button>
+
+            <table class="category-table">
+              <thead>
+                <tr>
+                  <th>S.No</th>
+                  <th>Category Name</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td>
+                    <button class="edit-btn">Edit</button>
+                    <button class="inactive-btn">Inactive</button>
+                  </td>
+                </tr>
+
+              </tbody>
+            </table>
+          </section>
+          <% categories.forEach(category => { %>
+          <tr>
+            <td><%= category.id %></td>
+            <td><%= category.name %></td>
+            <td>
+              <!-- Edit Category -->
+              <a href="/admin/categories/edit/<%= category.id %>">Edit</a> |
+              <!-- Delete Category -->
+              <a href="/admin/categories/delete/<%= category.id %>">Delete</a>
+            </td>
+          </tr>
+          <% }) %>
+          </tbody>
+          </table>
+          <% } %>
+        </main>
+      </div>
+
+    </div>
+  </div>
+ <%- include('common/script') %>
+</body>
+
+</html>

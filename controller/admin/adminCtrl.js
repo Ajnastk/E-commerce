@@ -1,5 +1,7 @@
-const adminPage=(req,res)=>{
-    res.render("admin/adminMain")
+
+
+const adminPage = (req, res) => {
+    res.render("admin/index");
 }
 
-module.exports = {adminPage}
+module.exports = { adminPage}

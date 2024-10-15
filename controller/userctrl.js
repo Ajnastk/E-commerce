@@ -82,13 +82,15 @@ const signin = async (req, res) => {
             return res.status(403).json({ success: false, message: "You are blocked from accessing this website" });
         }
 
-        if (findUser.isAdmin) {
-         return res.status(200).json({success:true,message:"Admin Login successful",redirectUrl:"/admin"})   
-        }
-
+        
         // If password matches and the user is not blocked, set up the session
         req.session.user_id = findUser._id;
-     
+        if (findUser.isAdmin) {
+            return res.status(200).json({success:true,message:"Admin Login successful",redirectUrl:"/admin"})   
+           }
+    
+
+
         // Send success response
         return res.status(200).json({ success: true, message: "Login successful",redirectUrl:"/" });
 

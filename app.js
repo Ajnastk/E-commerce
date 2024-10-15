@@ -13,6 +13,7 @@ const {notfound,errorhandler} = require("./middleware/error-handler")
 
 const PORT = process.env.PORT || 3008
 
+
 app.use(
     session({
         secret: 'yoursecretkey',
@@ -22,7 +23,6 @@ app.use(
     })
 );
 app.use(express.json());
-
 app.use(express.urlencoded({extended:true}))
 
 app.set("view engine","ejs");
@@ -34,11 +34,8 @@ app.use("/",authRoute);
 app.use(homeRoute);
 
 // Admin Route
-app.use('/admin',adminRoute);
+app.use(adminRoute);
 
-app.get('*', (req, res) => {
-  res.status(404).render('404');
-});
 
 app.use(notfound),app.use(errorhandler);
 
