@@ -204,6 +204,16 @@ const resetPassword = asyncHandler(async (req, res) => {
       });
   }
 });
+//-----user logout-----
+
+const Userlogout = (req,res)=>{
+  req.session.destroy((err)=>{
+    if(err){
+      return res.status(500).send("failed to logout")
+    }
+    res.redirect('/signin')
+  })
+}
 
 module.exports = {
   forgotpasswordGet,
@@ -212,4 +222,5 @@ module.exports = {
   verifyOtp,
   resetpasswordGet,
   resetPassword,
+  Userlogout,
 };

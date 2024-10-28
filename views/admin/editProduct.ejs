@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+  <title>Male-Fashion Admin</title>
+  <link rel="stylesheet" href="/css/editProduct.css">
+  <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/styles.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/b92a467578.js" crossorigin="anonymous"></script>
+
+
+
+</head>
+
+<%- include('common/headernav')  %>
+<%- include('common/sidenav')  %>
+
+<div id="layoutSidenav_content">
+
+  <div>
+    <main>
+        <!-- views/admin/editProduct.ejs -->
+<h2>Edit Product</h2>
+<form class="ep" action="/admin/products/edit/<%= product._id %>" method="POST" >
+    <label for="name">Product Name:</label>
+    <input type="text" name="name" id="name" value="<%= product.name %>" required>
+
+    <label for="price">Price:</label>
+    <input type="number" name="price" id="price" value="<%= product.price %>" required>
+
+    <label for="category">Category:</label>
+    <select name="category" id="category" required>
+        <% categories.forEach(category => { %>
+            <option value="<%= category._id %>" <%= product.category.equals(category._id) ? 'selected' : '' %>><%= category.name %></option>
+        <% }) %>
+    </select>
+
+    <label for="image">Image:</label>
+    <input type="file" name="image" id="image">
+    <% if (product.image) { %>
+        <img src="/img/uploads/<%= product.image %>" alt="Current Image" width="50">
+    <% } %>
+
+    <label for="stock">Stock:</label>
+    <input type="number" name="stock" id="stock" value="<%= product.stock %>" required>
+
+    <button type="submit">Update Product</button>
+</form>
+
+    </main>
+  </div>
+
+</div>
+
+</div>
+
+<%- include('common/script') %>
+
+
+ </body>
+
+ </html>

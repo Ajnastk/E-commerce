@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+  <title>Male-Fashion Admin</title>
+  <link rel="stylesheet" href="/css/category.css">
+  <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/styles.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/b92a467578.js" crossorigin="anonymous"></script>
+
+
+
+</head>
+
+<%- include('common/headernav')  %>
+<%- include('common/sidenav')  %>
+
+<div id="layoutSidenav_content">
+
+  <div>
+    <main>
+        <h1>Edit Category</h1>
+        <form action="/admin/category/edit/<%= category._id %>" method="POST">
+            <div>
+                <label for="slNo">Serial Number:</label>
+                <input type="text" id="slNo" name="slNo" value="<%= category.slNo %>" required>
+            </div>
+            <div>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" value="<%= category.name %>" required>
+            </div>
+            <div>
+                <label for="status">Status:</label>
+                <select id="status" name="status">
+                    <option value="active" <%= category.status === 'active' ? 'selected' : '' %>>Active</option>
+                    <option value="inactive" <%= category.status === 'inactive' ? 'selected' : '' %>>Inactive</option>
+                </select>
+            </div>
+            <button type="submit">Update Category</button>
+        </form>
+    </main>
+  </div>
+
+</div>
+
+</div>
+
+<%- include('common/script') %>
+
+
+ </body>
+
+ </html>

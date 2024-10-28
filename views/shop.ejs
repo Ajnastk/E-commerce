@@ -12,6 +12,8 @@
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap"
     rel="stylesheet">
+     <!-- Fontawesome -->
+     <script src="https://kit.fontawesome.com/b92a467578.js" crossorigin="anonymous"></script>
 
     <!-- Css Styles -->
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
@@ -78,19 +80,14 @@
                                         <div class="card-body">
                                             <div class="shop__sidebar__categories">
                                                 <ul class="nice-scroll">
-                                                    <li><a href="#">Men (20)</a></li>
-                                                    <li><a href="#">Women (20)</a></li>
-                                                    <li><a href="#">Bags (20)</a></li>
-                                                    <li><a href="#">Clothing (20)</a></li>
-                                                    <li><a href="#">Shoes (20)</a></li>
-                                                    <li><a href="#">Accessories (20)</a></li>
-                                                    <li><a href="#">Kids (20)</a></li>
-                                                    <li><a href="#">Kids (20)</a></li>
-                                                    <li><a href="#">Kids (20)</a></li>
+                                                    <% categories.forEach(category => { %>
+                                                        <li><a href="#"><%= category.name %> (<%= category.productCount %>)</a></li>
+                                                    <% }); %>
                                                 </ul>
                                             </div>
                                         </div>
                                     </div>
+                                </div>
                                 </div>
                                 <div class="card">
                                     <div class="card-heading">

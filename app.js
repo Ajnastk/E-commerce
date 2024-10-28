@@ -11,6 +11,10 @@ const homeRoute=require('./routes/homeRoute')
 const adminRoute=require('./routes/adminRoute')
 const {notfound,errorhandler} = require("./middleware/error-handler")
 
+const methodOverride = require('method-override');
+app.use(methodOverride('_method'));
+
+
 const PORT = process.env.PORT || 3008
 
 
@@ -29,12 +33,14 @@ app.set("view engine","ejs");
 app.set("views",path.join(__dirname, "views"));
 app.use(express.static("public"))
 
+app.use('/uploads', express.static('uploads')); // Serves files in uploads/ folder
+
 //user routes
 app.use("/",authRoute);
 app.use(homeRoute);
 
 // Admin Route
-app.use(adminRoute);
+app.use("/admin",adminRoute);
 
 
 app.use(notfound),app.use(errorhandler);

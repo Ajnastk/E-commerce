@@ -5,75 +5,147 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <meta name="description" content="E-commerce Admin Dashboard" />
-  <meta name="author" content="Admin" />
+
   <title>Male-Fashion Admin</title>
-<link rel="stylesheet" href="css/category.css">
+  <link rel="stylesheet" href="/css/category.css">
   <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
-  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="/css/styles.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
   <script src="https://kit.fontawesome.com/b92a467578.js" crossorigin="anonymous"></script>
+
+
+
 </head>
 
 <%- include('common/headernav')  %>
- <%- include('common/sidenav')  %>
- 
-    <div id="layoutSidenav_content">
+<%- include('common/sidenav')  %>
 
-      <div>
-        <main>
-          <!-- Categories Section -->
-          <% if (section === 'categories') { %>
-          <h1>Categories</h1>
+<div id="layoutSidenav_content">
 
-          <section class="category-section">
-            <h3>Category</h3>
-            <button class="add-category-btn">Add Category</button>
+  <div>
+    <main>
+      <h1>Category Management</h1>
 
-            <table class="category-table">
-              <thead>
-                <tr>
-                  <th>S.No</th>
-                  <th>Category Name</th>
-                  <th>Status</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td>
-                    <button class="edit-btn">Edit</button>
-                    <button class="inactive-btn">Inactive</button>
-                  </td>
-                </tr>
+      <!-- Category Form -->
+      <form id="categoryForm">
+        <div>
+          <label for="slNo">Serial Number:</label>
+          <input type="number" id="slNo" name="slNo" required>
+        </div>
 
-              </tbody>
-            </table>
-          </section>
-          <% categories.forEach(category => { %>
+        <div>
+          <label for="name">Category Name:</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+
+        <div>
+          <label for="status">Status:</label>
+          <select id="status" name="status">
+            <option value="active">Active</option>
+            <option value="inactive">Inactive</option>
+          </select>
+        </div>
+
+        <button type="submit" id="add">Add Category</button>
+      </form>
+
+      <!-- Category List -->
+      <table>
+        <thead>
           <tr>
-            <td><%= category.id %></td>
-            <td><%= category.name %></td>
-            <td>
-              <!-- Edit Category -->
-              <a href="/admin/categories/edit/<%= category.id %>">Edit</a> |
-              <!-- Delete Category -->
-              <a href="/admin/categories/delete/<%= category.id %>">Delete</a>
-            </td>
+            <th>Serial No</th>
+            <th>Name</th>
+            <th>Status</th>
+            <th>Modify Category</th>
           </tr>
+        </thead>
+        <tbody>
+          <% categories.forEach((category,index) => { %>
+          <tr>
+            <td><%= index+1 %></td>
+            <td><%= category.name %></td>
+            <td><%= category.status %></td>
+            <td>
+                <!-- Edit Button -->
+                <a href="/admin/category/edit/<%= category._id %>" class="btn-edit">Edit</a>
+
+                <!-- Delete Button (Optional) -->
+                <form action="/admin/category/delete/<%= category._id %>" method="POST" style="display: inline;">
+                    <button type="delete" class="btn-delete" onclick="return confirm('Are you sure you want to delete this category?');">Delete</button>
+                </form>
+            </td>
           <% }) %>
-          </tbody>
-          </table>
-          <% } %>
-        </main>
-      </div>
+        </tbody>
 
-    </div>
+      </table>
+    </main>
   </div>
- <%- include('common/script') %>
-</body>
 
-</html>
+</div>
+
+</div>
+
+<%- include('common/script') %>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+  // Handling form submission with fetch
+  document.getElementById('categoryForm').addEventListener('submit', async function(e) {
+    e.preventDefault(); // Prevent form from refreshing the page
+
+    // Get form data
+    const slNo = document.getElementById('slNo').value;
+    const name = document.getElementById('name').value;
+    const status = document.getElementById('status').value;
+
+    try {
+      // Fetch request to add category
+      const response = await fetch('/admin/category/add', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          slNo,
+          name,
+          status
+        }) // Send data to the server
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        // Success response: Show SweetAlert for successful category creation
+        Swal.fire({
+          icon: 'success',
+          title: 'Category Created!',
+          text: 'The category has been added successfully.',
+        }).then(()=>{
+          window.location.href = '/admin/category'
+        });
+      } else {
+        // Error response: Show SweetAlert for failure
+        Swal.fire({
+          icon: 'error',
+          title: 'Error!',
+          text: data.message || 'Failed to create category.',
+        });
+      }
+    } catch (error) {
+      // Catch any unexpected error during fetch
+      Swal.fire({
+        icon: 'error',
+        title: 'Error!',
+        text: 'An unexpected error occurred.',
+      });
+      console.error('Error:', error);
+    }
+  });
+
+
+
+ </script>
+ </body>
+
+ </html>

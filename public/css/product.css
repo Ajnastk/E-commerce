@@ -1,0 +1,145 @@
+     
+       body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .container {
+        width: 80%;
+        margin: 0 auto;
+        padding: 20px;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    h1, h2 {
+        color: #333;
+    }
+    
+   /* Styling the form container */
+.pform {
+    width: 50%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+/* Styling form labels */
+.pform label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Styling input fields */
+.pform input[type="text"],
+.pform input[type="number"],
+.pform input[type="file"].pform select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+/* Styling the select dropdown */
+.pform select {
+    background-color: #fff;
+    color: #333;
+    cursor: pointer;
+}
+
+/* Styling the submit button */
+.pform button[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    background-color: #007BFF;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.pform button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Adding responsiveness */
+@media (max-width: 768px) {
+    .pform {
+        width: 90%;
+    }
+}
+
+ /* Styling for Product List Table */
+.product-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+}
+
+.product-table th, .product-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.product-table thead {
+    background-color: #3c8dbc;
+    color: white;
+}
+
+.product-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.product-table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+.product-table .product-image {
+    border-radius: 5px;
+}
+
+.btn {
+    padding: 8px 12px;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 14px;
+    margin-right: 5px;
+    color: #fff;
+}
+
+.btn-edit {
+    background-color: #4CAF50; /* Green */
+}
+
+.btn-delete {
+    background-color: #f44336; /* Red */
+}
+
+.btn-delete:hover {
+    background-color: #c62828;
+}
+
+.btn-edit:hover {
+    background-color: #388e3c;
+}
+
+    .product-image {
+        width: 50px;
+        height: auto;
+    }
+    

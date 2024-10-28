@@ -1,47 +1,144 @@
-/* Category Section */
-.category-section {
-    background-color: #fff;
+
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7f6;
+    margin: 0;
     padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    color: #333;
 }
 
-.category-section h3 {
-    font-size: 24px;
+h1 {
+    text-align: center;
     margin-bottom: 20px;
+    font-size: 2.5rem;
+    color: #0056b3;
 }
 
-.add-category-btn {
-    padding: 10px 20px;
-    background-color: #eee;
-    border: none;
-    cursor: pointer;
-    margin-bottom: 20px;
+/* Form Styles */
+#categoryForm{
+    max-width: 600px;
+    margin: 0 auto 30px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.category-table {
+#categoryForm div {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    font-size: 1rem;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+input[type="number"], input[type="text"], select {
     width: 100%;
-    border-collapse: collapse;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
 }
 
-.category-table th, .category-table td {
-    padding: 15px;
-    border: 1px solid #ddd;
+
+button[type="submit"]:hover {
+    background-color: #007bff;
+}
+
+/* Table Styling */
+table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background-color: #fff;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+thead { 
+    background-color: #007bff;
+    color: white;
+
+}
+
+
+
+thead th {
+    padding: 12px;
     text-align: left;
 }
 
-.edit-btn, .inactive-btn {
+tbody td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Button Styles in the Actions Column */
+button {
+    padding: 8px 12px;
+    border: solid 0px;
+    border-radius: 10px;
+    cursor: pointer;
+
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+
+
+.btn-edit {
+    background-color: #007bff;
+    color: white;
+    padding: 5px 10px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.btn-edit:hover {
+    background-color: #15eb67;
+}
+
+.btn-delete {
+    background-color: #dc3545;
+    color: white;
     padding: 5px 10px;
     border: none;
+    border-radius: 5px;
     cursor: pointer;
-    margin-right: 5px;
 }
 
-.edit-btn {
-    background-color: #35495e;
-    color: #fff;
+.btn-delete:hover {
+    background-color: #4d040c;
 }
 
-.inactive-btn {
-    background-color: #f76c6c;
-    color: #fff;
+
+/* Responsive */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    form {
+        padding: 15px;
+    }
+
+    table th, table td {
+        padding: 10px;
+    }
 }

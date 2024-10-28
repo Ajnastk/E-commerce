@@ -1,9 +1,20 @@
+const asyncHandler = require("express-async-handler");
+// const Category = require('../../model/categoryModel')
+const Product = require( '../../model/productModel')
+
 const homepage=(req,res)=>{
-    res.render ("index");
+    res.render("index");
 }
-const shop=(req,res)=>{
-    res.render ("shop");
-}
+const shop = async (req, res) => {
+    try {
+        const categories = await Category.find(); // Fetch categories
+        const products = await Product.find().populate('category'); // Fetch products and populate category
+        res.render('shop', { products, categories }); // Pass both products and categories to the view
+    } catch (error) {
+        console.error("Error fetching products:", error);
+        res.status(500).send("Server Error");
+    }
+};
 
 const about=(req,res)=>{
     res.render("about");
